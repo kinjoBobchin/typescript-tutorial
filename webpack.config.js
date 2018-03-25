@@ -9,5 +9,6 @@ module.exports = {
     filename: "main.js"
 
   },
-  mode: "development"
+  // mode: "development"
+  mode: "production"
 }
