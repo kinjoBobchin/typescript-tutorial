@@ -79,7 +79,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sub */ \"./src/sub.ts\");\n// importでsub.jsを読み込む\n\n// subで定義されたhelloを実行\nObject(_sub__WEBPACK_IMPORTED_MODULE_0__[\"hello\"])();\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sub */ \"./src/sub.ts\");\n// importでsub.jsを読み込む\n\n// subで定義されたhelloを実行\nObject(_sub__WEBPACK_IMPORTED_MODULE_0__[\"hello\"])();\n\nObject(_sub__WEBPACK_IMPORTED_MODULE_0__[\"introduction\"])(\"bob\", \"boby\", 20);\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ }),
 
@@ -91,7 +91,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sub
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"hello\", function() { return hello; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"introduction\", function() { return introduction; });\nfunction hello() {\n    alert(\"helloメソッドが実行されました\");\n}\nvar firstName = \"bob\";\nvar lastName = \"boby\";\nvar age = 20;\nfunction introduction(firstName, lastName, age) {\n    alert(\"Hey, myname is \" + firstName + lastName);\n}\n\n\n//# sourceURL=webpack:///./src/sub.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"hello\", function() { return hello; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"introduction\", function() { return introduction; });\nfunction hello() {\n    alert(\"helloメソッドが実行されました\");\n}\nfunction introduction(firstName, lastName, age) {\n    alert(\"Hey, myname is \" + firstName + lastName);\n}\n\n\n//# sourceURL=webpack:///./src/sub.ts?");
 
 /***/ })
 

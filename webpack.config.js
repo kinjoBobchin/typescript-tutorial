@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   // メインになるJavaScriptのファイル
   entry: "./src/index.ts",
@@ -53,5 +55,12 @@ module.exports = {
         use: ['html-loader', 'pug-html-loader']
       }
     ]
-  }
+  },
+  plugins: [
+  new HtmlWebpackPlugin({
+    title: 'main template',
+    hash: true,
+    template: './src/index.pug'
+    })
+  ]
 }
