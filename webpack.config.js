@@ -1,6 +1,6 @@
 module.exports = {
   // メインになるJavaScriptのファイル
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
 
 
   output: {
@@ -30,13 +30,27 @@ module.exports = {
                 // envを使用することでES2017 を ES5に変換
                 // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、
                 // webpack の Tree Shaking 機能が使えない
-                ["env", {"modules": false}]
+                ["env", { "modules": false }]
               ]
             }
           }
         ],
         // node_moduleはbabelをかまさない
         exclude: /node_modules/,
+      }, {
+        test: /\.ts$/,
+        use: [
+          {
+            // TypeScript をコンパイルする
+            loader: "ts-loader"
+          }
+        ],
+        resolve: {
+          // import 文で .ts ファイルを解決するため
+          extensions: [
+            ".ts"
+          ]
+        }
       }
     ]
   }
