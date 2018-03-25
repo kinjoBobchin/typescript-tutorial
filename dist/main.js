@@ -87,11 +87,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sub
 /*!********************!*\
   !*** ./src/sub.ts ***!
   \********************/
-/*! exports provided: hello */
+/*! exports provided: hello, introduction */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"hello\", function() { return hello; });\nfunction hello() {\n    alert(\"helloメソッドが実行されました\");\n}\n\n\n//# sourceURL=webpack:///./src/sub.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"hello\", function() { return hello; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"introduction\", function() { return introduction; });\nfunction hello() {\n    alert(\"helloメソッドが実行されました\");\n}\nvar firstName = \"bob\";\nvar lastName = \"boby\";\nvar age = 20;\nfunction introduction(firstName, lastName, age) {\n    alert(\"Hey, myname is \" + firstName + lastName);\n}\n\n\n//# sourceURL=webpack:///./src/sub.ts?");
 
 /***/ })
 
