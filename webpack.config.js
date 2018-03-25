@@ -9,6 +9,11 @@ module.exports = {
     filename: "main.js"
 
   },
-  // mode: "development"
-  mode: "production"
+  mode: "development",
+
+
+  devServer: {
+    contentBase: "./dist",
+    open: true
+  }
 }
