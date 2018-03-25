@@ -1,3 +1,3 @@
 export function hello() {
-  console.log("helloメソッドが実行されました")
+  alert("helloメソッドが実行されました")
 }
