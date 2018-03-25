@@ -2,15 +2,12 @@ module.exports = {
   // メインになるJavaScriptのファイル
   entry: "./src/index.ts",
 
-
   output: {
-
     // 出力するファイル名
     filename: "main.js"
-
   },
-  mode: "development",
 
+  mode: "development",
 
   devServer: {
     contentBase: "./dist",
@@ -51,6 +48,9 @@ module.exports = {
             ".ts"
           ]
         }
+      }, {
+        test: /\.pug$/,
+        use: ['html-loader', 'pug-html-loader']
       }
     ]
   }
