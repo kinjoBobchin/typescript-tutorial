@@ -9,7 +9,7 @@ module.exports = {
     filename: "main.js"
   },
 
-  mode: "development",
+  mode: MODE,
 
   devServer: {
     contentBase: "./dist",
@@ -53,6 +53,17 @@ module.exports = {
       }, {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
+      }, {
+        test: /\.scss$/,
+        use: ["sass-loader", "css-loader", "style-loader"],
+        options: {
+          // オプションでCSS内のurl()メソッドの取り込みを禁止する
+          url: false,
+          // CSSの空白文字を削除する
+          minimize: true,
+          // ソースマップを有効にする
+          sourceMap: enabledSourceMap
+        }
       }
     ]
   },
