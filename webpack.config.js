@@ -1,19 +1,28 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const MODE = 'development';
+const enabledSourceMap = (MODE === 'development');
 
 module.exports = {
   // メインになるJavaScriptのファイル
   entry: "./src/index.ts",
 
-  output: {
+  output:
+  {
     // 出力するファイル名
     filename: "main.js"
   },
 
   mode: MODE,
 
-  devServer: {
+  devServer:
+  {
     contentBase: "./dist",
-    open: true
+    open: true,
+    hot: true,
+    compress: true,
+    stats: "errors-only" //コメントが冗長なので、エラーだけをlogに出力
   },
   module: {
     rules: [
@@ -36,7 +45,8 @@ module.exports = {
         ],
         // node_moduleはbabelをかまさない
         exclude: /node_modules/,
-      }, {
+      },
+      {
         test: /\.ts$/,
         use: [
           {
@@ -50,19 +60,21 @@ module.exports = {
             ".ts"
           ]
         }
-      }, {
+      },
+      {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
-      }, {
-        test: /\.scss$/,
-        use: ["sass-loader", "css-loader", "style-loader"],
+      },
+      {
+        test: /\.sass$/,
+        use: [ 'style-loader', 'sass-loader', 'css-loader' ],
         options: {
           // オプションでCSS内のurl()メソッドの取り込みを禁止する
           url: false,
           // CSSの空白文字を削除する
           minimize: true,
           // ソースマップを有効にする
-          sourceMap: enabledSourceMap
+          sourceMap: true
         }
       }
     ]
@@ -72,6 +84,13 @@ module.exports = {
     title: 'main template',
     hash: true,
     template: './src/index.pug'
-    })
-  ]
+    }),
+  new ExtractTextPlugin({
+    filename: "styles.css",
+    disable: false,
+    allChunks: true
+  }),
+  new webpack.NamedModulesPlugin(),
+  new webpack.HotModuleReplacementPlugin()
+  ],
 }
