@@ -1,4 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+
 const MODE = 'development';
 const enabledSourceMap = (MODE === 'development');
 
@@ -9,14 +12,15 @@ module.exports = {
 
   output: {
     // 出力するファイル名
-    filename: "main.js"
+    filename: "bundle.js"
   },
 
   mode: MODE,
 
   devServer: {
     contentBase: "./dist",
-    open: true
+    open: true,
+    hot: true
   },
   module: {
     rules: [
@@ -37,19 +41,16 @@ module.exports = {
             }
           }
         ],
-        // node_moduleはbabelをかまさない
-        exclude: /node_modules/,
+        exclude: /node_modules/, // node_moduleはbabelを通さない
       }, {
         test: /\.ts$/,
         use: [
           {
-            // TypeScript をコンパイルする
-            loader: "ts-loader"
+            loader: "ts-loader" // TypeScript をコンパイルする
           }
         ],
         resolve: {
-          // import 文で .ts ファイルを解決するため
-          extensions: [
+          extensions: [ // import 文で .ts ファイルを解決するため
             ".ts"
           ]
         }
@@ -81,10 +82,13 @@ module.exports = {
     ]
   },
   plugins: [
+  new CleanWebpackPlugin(['dist']),
   new HtmlWebpackPlugin({
     title: 'main template',
     hash: true,
     template: './src/index.pug'
-    })
+    }),
+  new webpack.NamedModulesPlugin(),
+  new webpack.HotModuleReplacementPlugin()
   ]
 }
