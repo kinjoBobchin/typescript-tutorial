@@ -7,12 +7,10 @@ const enabledSourceMap = (MODE === 'development');
 
 
 module.exports = {
-  // メインになるJavaScriptのファイル
-  entry: "./src/index.ts",
+  entry: "./src/index.ts", // メインになるJavaScriptのファイル
 
   output: {
-    // 出力するファイル名
-    filename: "bundle.js"
+    filename: "bundle.js" // 出力するファイル名
   },
 
   mode: MODE,
