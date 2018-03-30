@@ -1,4 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MODE = 'development';
+const enabledSourceMap = (MODE === 'development');
+
 
 module.exports = {
   // メインになるJavaScriptのファイル
@@ -54,16 +57,26 @@ module.exports = {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
       }, {
-        test: /\.scss$/,
-        use: ["sass-loader", "css-loader", "style-loader"],
-        options: {
-          // オプションでCSS内のurl()メソッドの取り込みを禁止する
-          url: false,
-          // CSSの空白文字を削除する
-          minimize: true,
-          // ソースマップを有効にする
-          sourceMap: enabledSourceMap
-        }
+        test: /\.sass$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options:
+              {
+                url: false, // オプションでCSS内のurl()メソッドの取り込みを禁止する
+                minimize: true, // CSSの空白文字を削除する
+                sourceMap: enabledSourceMap,
+                importLoaders: 2 // 2 => postcss-loader, sass-loader
+              }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: enabledSourceMap, // ソースマップの利用有無
+            }
+          }
+        ]
       }
     ]
   },
