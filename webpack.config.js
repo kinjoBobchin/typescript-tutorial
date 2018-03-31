@@ -1,8 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+
 const MODE = 'development';
 const enabledSourceMap = (MODE === 'development');
+
 
 module.exports = {
   // メインになるJavaScriptのファイル
@@ -11,7 +13,7 @@ module.exports = {
   output:
   {
     // 出力するファイル名
-    filename: "main.js"
+    filename: "bundle.js"
   },
 
   mode: MODE,
@@ -20,9 +22,7 @@ module.exports = {
   {
     contentBase: "./dist",
     open: true,
-    hot: true,
-    compress: true,
-    stats: "errors-only" //コメントが冗長なので、エラーだけをlogに出力
+    hot: true
   },
   module: {
     rules: [
@@ -43,20 +43,16 @@ module.exports = {
             }
           }
         ],
-        // node_moduleはbabelをかまさない
-        exclude: /node_modules/,
-      },
-      {
+        exclude: /node_modules/, // node_moduleはbabelを通さない
+      }, {
         test: /\.ts$/,
         use: [
           {
-            // TypeScript をコンパイルする
-            loader: "ts-loader"
+            loader: "ts-loader" // TypeScript をコンパイルする
           }
         ],
         resolve: {
-          // import 文で .ts ファイルを解決するため
-          extensions: [
+          extensions: [ // import 文で .ts ファイルを解決するため
             ".ts"
           ]
         }
@@ -64,33 +60,38 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
-      },
-      {
+      }, {
         test: /\.sass$/,
-        use: [ 'style-loader', 'sass-loader', 'css-loader' ],
-        options: {
-          // オプションでCSS内のurl()メソッドの取り込みを禁止する
-          url: false,
-          // CSSの空白文字を削除する
-          minimize: true,
-          // ソースマップを有効にする
-          sourceMap: true
-        }
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options:
+              {
+                url: false, // オプションでCSS内のurl()メソッドの取り込みを禁止する
+                minimize: true, // CSSの空白文字を削除する
+                sourceMap: enabledSourceMap,
+                importLoaders: 2 // 2 => postcss-loader, sass-loader
+              }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: enabledSourceMap, // ソースマップの利用有無
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
+  new CleanWebpackPlugin(['dist']),
   new HtmlWebpackPlugin({
     title: 'main template',
     hash: true,
     template: './src/index.pug'
     }),
-  new ExtractTextPlugin({
-    filename: "styles.css",
-    disable: false,
-    allChunks: true
-  }),
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin()
-  ],
+  ]
 }
