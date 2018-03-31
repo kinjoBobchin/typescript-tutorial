@@ -21,7 +21,7 @@ module.exports = {
     open: true,
     hot: true
   },
-  module: {
+  module:{
     rules: [
       {
         // 拡張子.jsの場合
@@ -41,7 +41,8 @@ module.exports = {
           }
         ],
         exclude: /node_modules/, // node_moduleはbabelを通さない
-      }, {
+      },
+      {
         test: /\.ts$/,
         use: [
           {
@@ -57,7 +58,8 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
-      }, {
+      },
+      {
         test: /\.sass$/,
         use: [
           'style-loader',
@@ -65,7 +67,7 @@ module.exports = {
             loader: 'css-loader',
             options:
               {
-                url: false, // オプションでCSS内のurl()メソッドの取り込みを禁止する
+                // url: true, // オプションでCSS内のurl()メソッドの取り込みを禁止する
                 minimize: true, // CSSの空白文字を削除する
                 sourceMap: enabledSourceMap,
                 importLoaders: 2 // 2 => postcss-loader, sass-loader
@@ -76,18 +78,24 @@ module.exports = {
             options: {
               sourceMap: enabledSourceMap, // ソースマップの利用有無
             }
-          }
+          },
         ]
+      },
+      {
+        test: /\.(gif|png|jpg|eot|wof|woff|woff2|ttf|svg)$/,
+        loader: 'url-loader'
       }
     ]
   },
   plugins: [
   new CleanWebpackPlugin(['dist']),
-  new HtmlWebpackPlugin({
-    title: 'main template',
-    hash: true,
-    template: './src/index.pug'
-    }),
+    new HtmlWebpackPlugin(
+      {
+        title: 'main template',
+        hash: true,
+        template: './src/index.pug'
+      }
+    ),
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin()
   ]
