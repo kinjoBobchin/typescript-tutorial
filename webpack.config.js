@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const MODE = 'development';
 const enabledSourceMap = (MODE === 'development');
@@ -97,6 +98,7 @@ module.exports = {
       }
     ),
   new webpack.NamedModulesPlugin(),
-  new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin()
   ]
 }
