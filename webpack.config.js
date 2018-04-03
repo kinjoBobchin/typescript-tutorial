@@ -89,7 +89,7 @@ module.exports = {
     ]
   },
   plugins: [
-  new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin(
       {
         title: 'main template',
@@ -97,7 +97,7 @@ module.exports = {
         template: './src/index.pug'
       }
     ),
-  new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
   ]
