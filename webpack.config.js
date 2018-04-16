@@ -47,7 +47,7 @@ module.exports = {
         test: /\.ts$/,
         use: [
           {
-            loader: "ts-loader" // TypeScript をコンパイルする
+            loader: "awesome-typescript-loader" // TypeScript をコンパイルする
           }
         ],
         resolve: {

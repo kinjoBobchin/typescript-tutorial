@@ -30,7 +30,7 @@
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "ts-loader": "^4.1.0",
+    "awesome-typescript-loader": "5.0.0",
     "typescript": "^2.7.2",
     "url-loader": "^1.0.1",
     "webpack": "^4.4.0",
