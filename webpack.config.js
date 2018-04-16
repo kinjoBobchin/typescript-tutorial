@@ -68,7 +68,7 @@ module.exports = {
             loader: 'css-loader',
             options:
               {
-                // url: true, // オプションでCSS内のurl()メソッドの取り込みを禁止する
+                url: true, // オプションでCSS内のurl()メソッドの取り込みを禁止する
                 minimize: true, // CSSの空白文字を削除する
                 sourceMap: enabledSourceMap,
                 importLoaders: 2 // 2 => postcss-loader, sass-loader
@@ -89,7 +89,7 @@ module.exports = {
     ]
   },
   plugins: [
-  new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin(
       {
         title: 'main template',
@@ -97,7 +97,7 @@ module.exports = {
         template: './src/index.pug'
       }
     ),
-  new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
   ]
